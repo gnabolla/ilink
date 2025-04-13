@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2025 at 03:08 PM
+-- Generation Time: Apr 13, 2025 at 03:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -99,6 +99,49 @@ INSERT INTO `accounts_rentals` (`LCode`, `LID`, `LastName`, `FirstName`, `Middle
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `paymentlisting_rentals`
+--
+
+CREATE TABLE `paymentlisting_rentals` (
+  `PID` int(11) NOT NULL,
+  `LID` varchar(50) DEFAULT NULL,
+  `Lessee` varchar(50) DEFAULT NULL,
+  `TotalAmountPaid` decimal(10,2) DEFAULT NULL,
+  `Advancepayment` decimal(10,2) DEFAULT 0.00,
+  `ORNo` varchar(50) DEFAULT NULL,
+  `ORDate` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `paymentlisting_rentals`
+--
+
+INSERT INTO `paymentlisting_rentals` (`PID`, `LID`, `Lessee`, `TotalAmountPaid`, `Advancepayment`, `ORNo`, `ORDate`) VALUES
+(520, '1611039', 'CALDERON, DOK TOTEP ', 7000.00, 0.00, '002902', '2017-02-06'),
+(521, '1611039', 'CALDERON, DOK TOTEP ', 7000.00, 0.00, '002913', '2017-02-22'),
+(522, '1609035', 'DY, BM DONDON ', 25000.00, 0.00, '000000', '2017-03-17'),
+(523, '1701045', 'CALDERON, JAN ENCISO', 1500.00, 0.00, '003034', '2017-01-19'),
+(524, '1701045', 'CALDERON, JAN ENCISO', 1500.00, 0.00, '003035', '2017-01-19'),
+(526, '1703038', 'IGNACIO, PRAXEDES ', 7000.00, 0.00, '003045', '2017-01-31'),
+(527, '1703038', 'IGNACIO, PRAXEDES ', 14000.00, 0.00, '002914', '2017-02-24'),
+(528, '1709034', 'DAYRIT, VILMA CADELIÑA', 2500.00, 0.00, '000000', '2017-01-01'),
+(529, '1709034', 'DAYRIT, VILMA CADELIÑA', 8000.00, 0.00, '000000', '2017-02-01'),
+(531, '1701042', 'FLORES, SAMUEL ', 4000.00, 0.00, '002927', '2017-03-17'),
+(532, '1701040', 'DUMAGUING, ELECTOR ', 4000.00, 0.00, '002911', '2017-02-17'),
+(533, '1610036', 'PARALLAG, ED.D., QUIRINO  ', 30000.00, 0.00, '000000', '2016-11-15'),
+(534, '1610036', 'PARALLAG, ED.D., QUIRINO  ', 15000.00, 0.00, '003048', '2017-02-02'),
+(535, '1610036', 'PARALLAG, ED.D., QUIRINO  ', 14096.00, 0.00, '3409', '2017-04-18'),
+(536, '1610036', 'PARALLAG, ED.D., QUIRINO  ', 14976.00, 0.00, '3408', '2017-04-18'),
+(537, '1701041', 'DAYAG, FLORENDO ', 3000.00, 0.00, '2922', '2017-03-09'),
+(538, '1701041', 'DAYAG, FLORENDO ', 3000.00, 0.00, '15068', '2017-04-29'),
+(539, '1701042', 'FLORES, SAMUEL ', 4000.00, 0.00, '2946', '2017-03-04'),
+(540, '1703038', 'IGNACIO, PRAXEDES ', 7280.00, 0.00, '2932', '2017-03-22'),
+(541, '1701040', 'DUMAGUING, ELECTOR ', 4000.00, 0.00, '2939', '2017-03-26'),
+(542, '1701040', 'DUMAGUING, ELECTOR ', 4000.00, 0.00, '15066', '2017-04-22');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `soa_rentals`
 --
 
@@ -153,7 +196,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `is_admin`, `created_at`) VALUES
 (1, 'admin', 'admin@gmail.com', '$2y$10$O1Y.4c1O2Fq6fQyKrr4nDeBdBNKa.Ik.LZh3TxnA/YYPSSNqb1zoG', 1, '2025-04-13 02:25:10'),
-(2, 'allobang', 'gnabolla@gmail.com', '$2y$10$YcDDlNaTOmmLI.2YQ33BueekbIFlsb4EP5jKj6SDfZYJCTxGxHsTm', 0, '2025-04-13 02:33:59');
+(2, 'allobang', 'gnabolla@gmail.com', '$2y$10$YcDDlNaTOmmLI.2YQ33BueekbIFlsb4EP5jKj6SDfZYJCTxGxHsTm', 0, '2025-04-13 02:33:59'),
+(3, 'Arlene', 'arlene@gmail.com', '$2y$10$CWdWRaSzqHHrUbQAbOPtveC75vvxs.7AkBsxMBYD31HbOtM3y8Aoa', 0, '2025-04-13 13:28:22');
 
 --
 -- Indexes for dumped tables
@@ -173,6 +217,13 @@ ALTER TABLE `accounts_rentals`
   ADD KEY `IDX_LID` (`LID`),
   ADD KEY `IDX_Category` (`Category`),
   ADD KEY `IDX_Status` (`Status`);
+
+--
+-- Indexes for table `paymentlisting_rentals`
+--
+ALTER TABLE `paymentlisting_rentals`
+  ADD KEY `PID` (`LID`),
+  ADD KEY `PID_2` (`PID`);
 
 --
 -- Indexes for table `soa_rentals`
@@ -207,6 +258,12 @@ ALTER TABLE `accounts_rentals`
   MODIFY `LCode` smallint(6) NOT NULL AUTO_INCREMENT COMMENT 'Internal primary key for the account record', AUTO_INCREMENT=1010;
 
 --
+-- AUTO_INCREMENT for table `paymentlisting_rentals`
+--
+ALTER TABLE `paymentlisting_rentals`
+  MODIFY `PID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16055;
+
+--
 -- AUTO_INCREMENT for table `soa_rentals`
 --
 ALTER TABLE `soa_rentals`
@@ -216,7 +273,7 @@ ALTER TABLE `soa_rentals`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
